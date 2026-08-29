@@ -1,0 +1,74 @@
+TASK: "Paper Rock Scissors" 
+Rock beats scissors, scissors beat paper, and paper beats rock
+Get computer randomly choose paper rock or scissors
+User chooses choose paper rock or scissors
+Keep a score
+Five rounds
+
+
+
+
+
+
+1. getComputerChoice:
+arr ["rock", "paper", "scissors']
+math.random()
+return
+
+
+
+2. getHumanChoice:
+LOOP:
+prompt.toLower();
+IF not rock paper scissors -> again
+ELSE end loop
+return
+
+
+
+3. playRound(humanScore, computerScore);
+
+let humanAnswer = getHumanChoice();
+let computerAnswer = getComputerChoice();   
+                                                    
+SWITCH:                                             
+    CASE 1: humanAnswer == computerAnswer 
+            PRINT choices + tie; 
+    CASE 2: humanAnswer == "rock" AND computerAnswer == "scissors" -> 
+            humanScore++;
+            PRINT choices + human won
+    CASE 3: humanAnswer == "scissors" AND computerAnswer == "paper" ->
+            humanScore++;
+            PRINT choices + human won
+    CASE 4: humanAnswer == "paper" AND computerAnswer == "rock" ->
+            humanScore++;
+            PRINT choices + human won
+    CASE 5: computerAnswer == "rock" AND humanAnswer == "scissors" -> 
+            computerAnswer++;
+            PRINT choices + computer won
+    CASE 6: computerAnswer == "scissors" AND humanAnswer == "paper" ->
+            computerAnswer++;
+            PRINT choices + computer won
+    CASE 7: computerAnswer == "paper" AND humanAnswer == "rock" ->
+            computerAnswer++;
+            PRINT choices + computer won
+
+
+4. getWinner (humanScore, computerScore)
+IF humanScore == computerScore: tie
+ELSE IF humanScore > computerScore: human won
+ELSE: computer won
+
+4. main():
+VARIABLES:
+let humanScore = 0;
+let computerScore = 0;
+let i = 0; 
+
+while i < 5:
+print(round i+1);
+CALL playRound(humanScore, computerScore)
+print(score)
+i++;
+
+CALL getWinner(humanScore, computerScore)

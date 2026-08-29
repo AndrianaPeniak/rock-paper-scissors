@@ -1,11 +1,13 @@
-function main() {
+async function main() {
+
     let i = 0;
     let humanScore = 0;
     let computerScore = 0;
+    
 
     while (i < 5) {
         console.log(`Round ${i+1}`);
-        let scores = playRound(humanScore, computerScore);
+        let scores = await playRound(humanScore, computerScore);
         humanScore = scores.human;
         computerScore = scores.computer;
         console.log(`Score\nYou: ${humanScore}, Computer: ${computerScore}`);
@@ -21,22 +23,21 @@ function getComputerChoice(){
 }
 
 function getHumanChoice(){
-    let isValid = false;
-    while (isValid == false) {
-        let answer = prompt("Your choice:");
-        answer = answer.toLowerCase();
-        if (answer == "rock" || answer == "scissors" || answer == "paper"){
-            return answer;
-            isValid = true;
-        } else {
-            console.log("Can't recognise your choice.");
-            continue;
-        }
-    }
+    return new Promise((resolve) => {
+        const menu = document.getElementById("menu");
+
+        menu.addEventListener('click', function handler(event) {
+            const target = event.target;
+            if (['rock', 'paper', 'scissors'].includes(target.id)) {
+                menu.removeEventListener('click', handler);
+                resolve(target.id);
+            }
+        });
+    });
 }
 
-function playRound(humanScore, computerScore){
-    const humanChoice = getHumanChoice();
+async function playRound(humanScore, computerScore){
+    const humanChoice = await getHumanChoice();
     const computerChoice = getComputerChoice();
     console.log(`Your choice: ${humanChoice}`);
     console.log(`Computer choice: ${computerChoice}`);
@@ -72,7 +73,7 @@ function getWinner(humanScore, computerScore) {
     if (humanScore > computerScore) {
         console.log("You won the game!");
     } else if (humanScore < computerScore) {
-        console.log("COmputer won the game!");
+        console.log("Computer won the game!");
     } else {
         console.log("It's a tie!");
     }
